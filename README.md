@@ -14,6 +14,15 @@ DeepSeek Harness（DSH）Web 界面的**语音输入插件**：聊天输入框�
 
 ---
 
+## ⚡ 快速开始
+
+1. **安装**：`dsh plugin --profile web add dsh-web-voice-input`
+2. **重启** DeepSeek Harness，聊天输入框下方出现语音图标 🎤
+3. **点击** 🎤 → 去 [cloud.siliconflow.cn](https://cloud.siliconflow.cn) 免费申请一个 API Key 填入即可
+   （免费模型无限额度，中文识别效果好，国内直连）→ 保存后直接开始语音聊天
+
+---
+
 ## ✨ 功能特性
 
 - 🎙️ 聊天框麦克风按钮：点击录音 → 再点停止 → 文字自动入框（可配置自动发送）
@@ -54,6 +63,8 @@ dsh web --dump-config | findstr voice-input    # 应看到 - id: voice-input 一
 
 重启后在 GUI 中：**先新建或打开一个会话**，聊天输入框左下角应出现 🎤 按钮。
 
+![语音输入按钮位置](docs/screenshot-ui.png)
+
 ## 🎤 首次使用
 
 1. **申请 API Key（推荐硅基流动）**：打开 [cloud.siliconflow.cn](https://cloud.siliconflow.cn)
@@ -62,6 +73,8 @@ dsh web --dump-config | findstr voice-input    # 应看到 - id: voice-input 一
 2. **点击聊天框的麦克风按钮** → 自动弹出「配置语音识别」窗口
 3. 服务商默认选中「SiliconFlow 硅基流动」，粘贴你的 Key，点「保存并开始录音」
 4. 保存时插件会自动验证 Key：显示「Key 验证通过 ✓」后即开始录音，之后无需再做任何配置
+
+![配置语音识别弹窗](docs/screenshot-config.png)
 
 没有 Key 时的点击行为就是弹窗；有 Key 后点击直接开始录音。
 
