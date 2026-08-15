@@ -1,5 +1,5 @@
 /**
- * dsh-voice-input — browser half declaration.
+ * dsh-web-voice-input — browser half declaration.
  *
  * The client bundle registers a session-scoped component in the
  * `conversation.input.left` slot: a microphone button that records audio,

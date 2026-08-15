@@ -1,4 +1,4 @@
-# dsh-voice-input 🎤
+# dsh-web-voice-input 🎤
 
 Voice input for the [DeepSeek Harness (DSH)](https://github.com/deepseek-ai/deepseek-harness) Web GUI.
 
@@ -31,7 +31,7 @@ no build step, hot-pluggable through the standard DSH plugin mechanism.
 
 ```bash
 # from npm (once published)
-dsh plugin --profile web add dsh-voice-input
+dsh plugin --profile web add dsh-web-voice-input
 
 # from a local checkout (source edits apply on restart)
 dsh plugin --profile web add <path-to-this-repo>
@@ -191,7 +191,7 @@ DeepSeek Harness (DSH) Web 界面的**语音输入插件**：聊天输入框左�
 ### 安装
 
 ```bash
-dsh plugin --profile web add dsh-voice-input   # npm 发布后
+dsh plugin --profile web add dsh-web-voice-input   # npm 发布后
 dsh plugin --profile web add <本地仓库路径>      # 本地源码（改完重启即生效）
 ```
 

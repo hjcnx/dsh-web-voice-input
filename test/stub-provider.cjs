@@ -1,5 +1,5 @@
 /**
- * CORS-enabled stub ASR provider for offline browser tests of dsh-voice-input
+ * CORS-enabled stub ASR provider for offline browser tests of dsh-web-voice-input
  * direct mode. Serves an OpenAI-compatible /audio/transcriptions endpoint that
  * answers every request with a canned transcription.
  */

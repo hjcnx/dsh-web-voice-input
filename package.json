@@ -1,5 +1,5 @@
 {
-  "name": "dsh-voice-input",
+  "name": "dsh-web-voice-input",
   "version": "0.1.0",
   "description": "Voice input for the DeepSeek Harness (DSH) Web GUI: a microphone button in the chat composer that records audio, transcribes it through an OpenAI-compatible Whisper API (Groq / OpenAI / SiliconFlow), and inserts the recognized text into the input box.",
   "keywords": [
@@ -51,11 +51,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hjcnx/dsh-voice-input.git"
+    "url": "git+https://github.com/hjcnx/dsh-web-voice-input.git"
   },
-  "homepage": "https://github.com/hjcnx/dsh-voice-input#readme",
+  "homepage": "https://github.com/hjcnx/dsh-web-voice-input#readme",
   "bugs": {
-    "url": "https://github.com/hjcnx/dsh-voice-input/issues"
+    "url": "https://github.com/hjcnx/dsh-web-voice-input/issues"
   },
   "license": "MIT"
 }

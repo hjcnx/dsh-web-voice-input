@@ -1,5 +1,5 @@
 /**
- * Browser end-to-end test for dsh-voice-input.
+ * Browser end-to-end test for dsh-web-voice-input.
  *
  * Launches headless Chrome with fake media devices, opens the DSH web GUI on
  * a test instance (which must run with the mock patch overlay), then:
@@ -133,12 +133,12 @@ async function main() {
 		const bootDeadline = Date.now() + 90000;
 		while (Date.now() < bootDeadline) {
 			result.bootGraphOk = await evaluate(
-				`!!(window.__DSH_BOOT__ && Array.isArray(window.__DSH_BOOT__.entries) && window.__DSH_BOOT__.entries.some(e => e.id === 'dsh-voice-input'))`
+				`!!(window.__DSH_BOOT__ && Array.isArray(window.__DSH_BOOT__.entries) && window.__DSH_BOOT__.entries.some(e => e.id === 'dsh-web-voice-input'))`
 			);
 			if (result.bootGraphOk) break;
 			await sleep(1000);
 		}
-		if (!result.bootGraphOk) throw new Error("boot graph never included dsh-voice-input");
+		if (!result.bootGraphOk) throw new Error("boot graph never included dsh-web-voice-input");
 
 		// 2. open a session and wait for the mic button (or report what we see)
 		const micDeadline = Date.now() + 120000;

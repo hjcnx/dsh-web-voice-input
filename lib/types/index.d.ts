@@ -1,5 +1,5 @@
 /**
- * dsh-voice-input — host half declaration.
+ * dsh-web-voice-input — host half declaration.
  */
 import type { Context } from '@deepseek-ai/cordis';
 
@@ -28,7 +28,7 @@ export interface VoiceInputConfig {
 }
 
 /** Stable cordis plugin name. */
-export declare const name: 'dsh-voice-input';
+export declare const name: 'dsh-web-voice-input';
 
 /** Required services (the web server). */
 export declare const inject: string[];

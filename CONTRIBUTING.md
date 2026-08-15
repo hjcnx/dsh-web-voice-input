@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for your interest in dsh-voice-input! This is a dual-face
+Thanks for your interest in dsh-web-voice-input! This is a dual-face
 [DeepSeek Harness (DSH)](https://github.com/deepseek-ai/deepseek-harness) web
 plugin: the host half runs in the dsh host process, the browser half loads in
 the Web GUI.

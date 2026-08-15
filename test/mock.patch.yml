@@ -1,4 +1,4 @@
-# Offline test overlay for dsh-voice-input.
+# Offline test overlay for dsh-web-voice-input.
 # Use with: dsh web --port <port> --patch <this file>
 # The route then answers with this canned text and never calls the upstream
 # ASR API — for verifying the browser pipeline without a working API key.

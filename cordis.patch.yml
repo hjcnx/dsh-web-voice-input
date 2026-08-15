@@ -1,14 +1,14 @@
-# dsh-voice-input bundle patch: inserts the dual-face plugin row into the web
-# profile roster. Applied as a profile bundle layer (the `dsh.bundle.patch`
+# dsh-web-voice-input bundle patch: inserts the dual-face plugin row into the
+# web profile roster. Applied as a profile bundle layer (the `dsh.bundle.patch`
 # manifest field) over dsh-base / dsh-web-app.
 #
 # The row is a bare plugin by package name: the node half (exports ".") runs in
-# the host process and registers the /api/voice-input/transcribe route; the
+# the host process and registers the /api/voice-input/* routes; the
 # `dsh.client` declaration in package.json makes the browser half
-# (exports "./client", served at /plugins/voice-input/client.js) load in the
-# web GUI.
+# (exports "./client", served at /plugins/dsh-web-voice-input/client.js) load
+# in the web GUI.
 #
-# Configure the Groq API key in the PROFILE's own cordis.patch.yml (user layer,
+# Configure the API key in the PROFILE's own cordis.patch.yml (user layer,
 # applied after this bundle layer), e.g.:
 #
 #   - id: voice-input
@@ -18,4 +18,4 @@
 #       language: ''                    # '' = auto-detect (supports zh/en/...)
 - insert:
     - id: voice-input
-      name: 'dsh-voice-input'
+      name: 'dsh-web-voice-input'
