@@ -3,7 +3,7 @@ node_modules/
 
 # Browser E2E test artifacts (regenerated on every test run)
 test/chrome-profile/
-test/speech.wav
+test/*.wav
 
 # Misc
 *.log
