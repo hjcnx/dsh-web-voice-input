@@ -35,7 +35,24 @@ DeepSeek Harness（DSH）Web 界面的**语音输入插件**：聊天输入框�
 dsh plugin --profile web add dsh-web-voice-input
 ```
 
-重启 `dsh web`，聊天输入框左侧出现麦克风按钮。
+重启 `dsh web`，打开一个会话后，聊天输入框左侧出现麦克风按钮。
+
+### 环境要求
+
+| 项目 | 要求 |
+|---|---|
+| DSH | 0.1.0-rc.6（本插件在该版本上开发与测试） |
+| pnpm | 已安装并在 PATH 中（`dsh plugin` 依赖它，缺了会提示 "pnpm not found"） |
+| 浏览器 | Chrome / Edge 最佳，Firefox / Safari 亦支持（录音格式自动适配） |
+| 访问方式 | 通过 `http://127.0.0.1:3080` 本机访问 GUI；**局域网/手机远程页面不支持语音功能**（浏览器麦克风安全策略 + 插件回环安全围栏，属安全设计） |
+
+### 安装自检
+
+```bash
+dsh web --dump-config | findstr voice-input    # 应看到 - id: voice-input 一行
+```
+
+重启后在 GUI 中：**先新建或打开一个会话**，聊天输入框左下角应出现 🎤 按钮。
 
 ## 🎤 首次使用
 
@@ -103,6 +120,14 @@ profile 配置（`~/.dsh/profiles/web/cordis.patch.yml` 的 `voice-input` 行）
 讯飞、腾讯云、百度、火山引擎、MiniMax 等为私有协议，需要单独适配（见 Roadmap）。
 
 ## ❓ 常见问题
+
+**看不到麦克风按钮？**
+麦克风按钮挂在会话级输入框上，需要先**新建/打开一个会话**才会渲染。若仍看不到，跑一下
+`dsh web --dump-config | findstr voice-input` 确认插件行已进配置，并确认重启过 `dsh web`。
+
+**在手机 / 局域网其他设备上能用语音吗？**
+不能，这是安全设计：浏览器仅在 `localhost` 等安全上下文允许麦克风，且插件的配置与转写
+路由只接受本机回环请求。远程页面请继续用文字输入。
 
 **Groq 返回 403 Forbidden（key 本身有效）？**
 Groq 音频模型按账号地区/权限开放。去 [Groq 控制台](https://console.groq.com/keys) 检查，
