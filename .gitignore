@@ -2,8 +2,9 @@
 node_modules/
 
 # Browser E2E test artifacts (regenerated on every test run)
-test/chrome-profile/
+test/chrome-profile*/
 test/*.wav
+test/tmp-store.json*
 
 # Misc
 *.log

@@ -33,6 +33,10 @@ never touches your running GUI:
 dsh web --patch test/mock.patch.yml --port 3099 &
 node test/cdp-test.cjs
 
+# first-run setup dialog test (no key configured → dialog → save → store write)
+dsh web --patch test/popup.patch.yml --port 3099 &
+node test/popup-test.cjs
+
 # direct-mode test against a local CORS-enabled stub provider
 node test/stub-provider.cjs &
 dsh web --patch test/direct.patch.yml --port 3099 &

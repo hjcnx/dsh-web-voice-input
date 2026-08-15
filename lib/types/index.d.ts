@@ -25,6 +25,8 @@ export interface VoiceInputConfig {
 	autoSend?: boolean;
 	/** Offline test seam: canned transcription result, upstream never called. */
 	mock?: string;
+	/** User-store file override (defaults to ~/.dsh/dsh-web-voice-input.json; tests/custom deployments). */
+	storePath?: string;
 }
 
 /** Stable cordis plugin name. */

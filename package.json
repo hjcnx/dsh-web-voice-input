@@ -1,6 +1,6 @@
 {
   "name": "dsh-web-voice-input",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Voice input for the DeepSeek Harness (DSH) Web GUI: a microphone button in the chat composer that records audio, transcribes it through an OpenAI-compatible Whisper API (Groq / OpenAI / SiliconFlow), and inserts the recognized text into the input box.",
   "keywords": [
     "dsh",

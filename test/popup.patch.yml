@@ -1,0 +1,7 @@
+# Offline test overlay: no API key anywhere → the first-run setup dialog
+# should appear when the mic button is clicked. The store writes go to a
+# temp file so the real user store is never touched by tests.
+- id: voice-input
+  config:
+    storePath: 'C:/Users/hjc05/dsh-voice-input/test/tmp-store.json'
+    provider: siliconflow
