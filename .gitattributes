@@ -1,0 +1,4 @@
+# Normalize line endings in the repository (LF), leave local checkouts alone.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
