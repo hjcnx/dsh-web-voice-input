@@ -51,11 +51,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/<owner>/dsh-voice-input.git"
+    "url": "git+https://github.com/hjcnx/dsh-voice-input.git"
   },
-  "homepage": "https://github.com/<owner>/dsh-voice-input#readme",
+  "homepage": "https://github.com/hjcnx/dsh-voice-input#readme",
   "bugs": {
-    "url": "https://github.com/<owner>/dsh-voice-input/issues"
+    "url": "https://github.com/hjcnx/dsh-voice-input/issues"
   },
   "license": "MIT"
 }
