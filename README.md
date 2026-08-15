@@ -55,7 +55,7 @@ the browser asks for microphone permission on first click.
 
 | Key | Default | Description |
 |---|---|---|
-| `provider` | `groq` | `groq` / `openai` / `siliconflow` (all OpenAI-compatible `/audio/transcriptions`) |
+| `provider` | `groq` | `groq` / `openai` / `siliconflow` / `dashscope` (all OpenAI-compatible `/audio/transcriptions`) |
 | `apiKey` | env `GROQ_API_KEY` | API key; host-side only unless `direct: true` |
 | `baseUrl` | provider default | Custom OpenAI-compatible endpoint |
 | `model` | provider default | Transcription model |
@@ -73,6 +73,14 @@ Groq gates audio models by account region/permission. Options: enable whisper in
 the [Groq console](https://console.groq.com/keys), use another key/account, or
 switch `provider: siliconflow` (SenseVoiceSmall is excellent for Chinese and
 works without a proxy in China).
+
+**Which providers work in mainland China without a proxy?**
+`siliconflow` (SenseVoiceSmall) and `dashscope` (Alibaba Cloud Model Studio,
+`qwen-audio-asr`) both serve OpenAI-compatible `/audio/transcriptions`
+endpoints and are directly reachable. You can also point `baseUrl` at any
+OpenAI-compatible ASR service, including fully local ones (whisper.cpp /
+LocalAI / vLLM, e.g. `http://127.0.0.1:8080/v1/audio/transcriptions` — no API
+key, no network, best privacy).
 
 **I use a proxy (e.g. Clash). Which mode should I pick?**
 `direct: true` — the browser makes the upstream call, so the request goes through

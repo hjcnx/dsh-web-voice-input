@@ -7,8 +7,8 @@ import type { Context } from '@deepseek-ai/cordis';
 export interface VoiceInputConfig {
 	/** `false` disables the whole plugin. Default `true`. */
 	enabled?: boolean;
-	/** Transcription provider: `groq` | `openai` | `siliconflow`. Default `groq`. */
-	provider?: 'groq' | 'openai' | 'siliconflow';
+	/** Transcription provider: `groq` | `openai` | `siliconflow` | `dashscope`. Default `groq`. */
+	provider?: 'groq' | 'openai' | 'siliconflow' | 'dashscope';
 	/** API key; falls back to `GROQ_API_KEY`. */
 	apiKey?: string;
 	/** Custom OpenAI-compatible endpoint override. */

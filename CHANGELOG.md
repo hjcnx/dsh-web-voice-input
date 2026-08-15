@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Microphone button in the DSH Web GUI chat composer (`conversation.input.left` slot)
 - One-click record / click-again-to-stop flow with MediaRecorder (webm/opus preferred)
-- Transcription through OpenAI-compatible `/audio/transcriptions` providers: Groq (default), OpenAI, SiliconFlow
+- Transcription through OpenAI-compatible `/audio/transcriptions` providers: Groq (default), OpenAI, SiliconFlow, Alibaba Cloud DashScope — plus any custom endpoint via `baseUrl`
 - Two network modes:
   - `direct: true` — the browser calls the ASR API itself (rides the system proxy)
   - `direct: false` (default) — the local dsh host forwards the audio

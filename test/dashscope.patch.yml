@@ -1,0 +1,6 @@
+# Offline test overlay: dashscope provider defaults.
+- id: voice-input
+  config:
+    provider: dashscope
+    apiKey: sk-test
+    language: zh
