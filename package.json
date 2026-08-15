@@ -1,0 +1,61 @@
+{
+  "name": "dsh-voice-input",
+  "version": "0.1.0",
+  "description": "Voice input for the DeepSeek Harness (DSH) Web GUI: a microphone button in the chat composer that records audio, transcribes it through an OpenAI-compatible Whisper API (Groq / OpenAI / SiliconFlow), and inserts the recognized text into the input box.",
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "plugin",
+    "voice-input",
+    "speech-to-text",
+    "whisper",
+    "groq",
+    "web-ui",
+    "microphone"
+  ],
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "types": "./lib/types/client.d.ts",
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-locale"
+      ],
+      "platform": "web"
+    }
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/<owner>/dsh-voice-input.git"
+  },
+  "homepage": "https://github.com/<owner>/dsh-voice-input#readme",
+  "bugs": {
+    "url": "https://github.com/<owner>/dsh-voice-input/issues"
+  },
+  "license": "MIT"
+}

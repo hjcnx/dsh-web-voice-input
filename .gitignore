@@ -1,0 +1,11 @@
+# Dependencies
+node_modules/
+
+# Browser E2E test artifacts (regenerated on every test run)
+test/chrome-profile/
+test/speech.wav
+
+# Misc
+*.log
+.DS_Store
+Thumbs.db

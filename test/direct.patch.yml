@@ -1,0 +1,10 @@
+# Offline test overlay: browser-direct mode against the local stub provider
+# (test/stub-provider.js). Use with:
+#   node test/stub-provider.js &
+#   dsh web --patch <this file> --port 3099
+- id: voice-input
+  config:
+    direct: true
+    baseUrl: 'http://127.0.0.1:3900/v1/audio/transcriptions'
+    apiKey: test-key
+    model: stub-model
