@@ -15,7 +15,9 @@ no build step, hot-pluggable through the standard DSH plugin mechanism.
 
 - 🎙️ One-click record / click-again-to-stop in the composer (`conversation.input.left` slot)
 - 🌐 OpenAI-compatible providers: **Groq** (default, `whisper-large-v3-turbo`),
-  **OpenAI** (`whisper-1`), **SiliconFlow** (`FunAudioLLM/SenseVoiceSmall`) — or any custom endpoint
+  **OpenAI** (`whisper-1`), **SiliconFlow** (`FunAudioLLM/SenseVoiceSmall`),
+  **Alibaba Cloud DashScope** (`qwen-audio-asr`) — or any custom endpoint
+  (including fully local whisper.cpp / LocalAI / vLLM servers)
 - 🔀 Two network modes:
   - `direct: true` — the **browser** calls the ASR API itself (rides your system proxy)
   - `direct: false` (default) — the local dsh **host** forwards the audio
@@ -41,8 +43,8 @@ Then configure the API key in the **profile user layer**
 ```yaml
 - id: voice-input
   config:
-    apiKey: gsk_xxx                # your Groq key (or set GROQ_API_KEY env)
-    provider: groq                 # groq | openai | siliconflow
+    apiKey: gsk_xxx                # your provider key (or set GROQ_API_KEY env)
+    provider: groq                 # groq | openai | siliconflow | dashscope
     model: whisper-large-v3-turbo  # default per provider when omitted
     language: ''                   # '' = auto-detect (zh/en/…)
     direct: true                   # browser calls the API itself (uses system proxy)
@@ -65,6 +67,54 @@ the browser asks for microphone permission on first click.
 | `autoSend` | `false` | Submit the draft automatically once text lands in the composer |
 | `mock` | — | Non-empty string = canned result, upstream never called (offline tests) |
 | `enabled` | `true` | `false` disables the plugin |
+
+## Providers & Models
+
+Built-in providers (all speak the OpenAI-compatible `/audio/transcriptions` protocol):
+
+| `provider` | Default model | Other models | Mainland China direct access |
+|---|---|---|---|
+| `groq` | `whisper-large-v3-turbo` | `whisper-large-v3` | ❌ needs proxy |
+| `openai` | `whisper-1` | — | ❌ needs proxy |
+| `siliconflow` | `FunAudioLLM/SenseVoiceSmall` | SenseVoice variants | ✅ |
+| `dashscope` | `qwen-audio-asr` | `qwen-audio-asr-latest`, `qwen-audio-3-0-asr-flash` | ✅ |
+
+**Mainland China (no proxy) — SiliconFlow** (SenseVoice is excellent at Chinese):
+
+```yaml
+- id: voice-input
+  config:
+    provider: siliconflow
+    apiKey: sk-xxxxxxxx          # console.siliconflow.cn
+    language: zh
+    direct: false                # reachable from the host directly
+```
+
+**Mainland China (no proxy) — Alibaba Cloud Model Studio (百炼)**:
+
+```yaml
+- id: voice-input
+  config:
+    provider: dashscope
+    apiKey: sk-xxxxxxxx          # bailian.console.aliyun.com
+    language: zh
+```
+
+**Any other OpenAI-compatible endpoint** — including fully local, free,
+privacy-first ASR servers (whisper.cpp / LocalAI / vLLM):
+
+```yaml
+- id: voice-input
+  config:
+    baseUrl: http://127.0.0.1:8080/v1/audio/transcriptions
+    model: whisper-large-v3-turbo
+    apiKey: local                # dummy — local servers ignore it
+    direct: false
+```
+
+Providers with proprietary (non-OpenAI-compatible) ASR protocols — iFlytek,
+Tencent Cloud, Baidu, Volcengine, MiniMax — need a custom adapter and are not
+reachable through `baseUrl` alone (see Roadmap).
 
 ## FAQ
 
@@ -131,7 +181,7 @@ DeepSeek Harness (DSH) Web 界面的**语音输入插件**：聊天输入框左�
 ### 特点
 
 - 零运行时依赖、免构建，标准 DSH 双面插件（`dsh.bundle.patch` + `dsh.client`），一行命令安装
-- 支持 Groq（默认）/ OpenAI / SiliconFlow 或任意 OpenAI 兼容端点
+- 内置 Groq（默认）/ OpenAI / SiliconFlow / 阿里云百炼 DashScope 四家服务商，或任意 OpenAI 兼容端点（含 whisper.cpp / LocalAI / vLLM 本地服务）
 - 双网络模式：`direct: true` 浏览器直连（走系统代理）；`direct: false` 本机宿主转发
 - 两条 host 路由均有回环信任围栏；API key 只存在 profile 配置里，绝不进插件代码和客户端 bundle
 - 录音超时自动停止（默认 60 秒）、切换会话自动取消录音、转写完成后焦点回到输入框
@@ -147,6 +197,13 @@ dsh plugin --profile web add <本地仓库路径>      # 本地源码（改完�
 
 在 profile 用户层 `~/.dsh/profiles/web/cordis.patch.yml` 配置（见上文 YAML 示例），
 重启 `dsh web` 后输入框左侧出现麦克风按钮。
+
+### 国内直连配置
+
+- **硅基流动**：`provider: siliconflow`（SenseVoiceSmall，中文效果好、便宜）
+- **阿里云百炼**：`provider: dashscope`（`qwen-audio-asr`）
+- **完全本地**：`baseUrl` 指向 whisper.cpp / LocalAI / vLLM 的本地服务，零费用、零联网
+- 服务商与模型速查表见上文 [Providers & Models](#providers--models)
 
 ### 常见问题
 
