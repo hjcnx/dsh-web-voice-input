@@ -5,6 +5,23 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2026-09-27
+
+### Added
+
+- 转写后处理（`lib/postprocess.js`）：专名纠错 + 中文数字规范化
+  - 专名纠错：`Cloud Code` / `Clock Coat` → `Claude Code`、`Hermis` → `Hermes`、
+    `LangChain 四 j` → `LangChain4j`、`rag` → `RAG`、`spring boot` → `Spring Boot` 等
+  - 中文数字 → 阿拉伯数字：`二零二六年八月十五日` → `2026年8月15日`、
+    `二十八度` → `28度`、`六百六十六` → `666`（白名单量词，不误伤“一起/一样/十分/一点”）
+  - 动机：ASR 对训练数据外的新词专名易同音误识别，而 SiliconFlow 的
+    `/audio/transcriptions` 只接受 `file` + `model`，不支持 prompt/热词引导
+
+### Changed
+
+- `siliconflow` 默认模型 `FunAudioLLM/SenseVoiceSmall`（平台已下架）
+  → `Qwen/Qwen3-ASR-1.7B`（实测英文专名更准：Hermes / Codex / Spring Boot 均正确）
+
 ## [0.2.0] - unreleased
 
 ### Added

@@ -4,7 +4,7 @@ DeepSeek Harness（DSH）Web 界面的**语音输入插件**：聊天输入框�
 点击开始录音、再次点击停止，语音经 Whisper 类 ASR 接口识别后**自动填入输入框**
 （已有文字则追加）。零运行时依赖、免构建、热插拔，一行命令安装。
 
-**主要面向国内用户**：默认使用硅基流动（SenseVoice 系列，中文识别准确、国内直连、
+**主要面向国内用户**：默认使用硅基流动（Qwen3-ASR，中英混排识别准确、国内直连、
 有免费额度），首次点击麦克风会弹出设置窗口，粘贴 API Key 即可使用，全程无需编辑任何配置文件。
 
 > English summary: a microphone button in the DSH Web chat composer that records,
@@ -28,13 +28,15 @@ DeepSeek Harness（DSH）Web 界面的**语音输入插件**：聊天输入框�
 - 🎙️ 聊天框麦克风按钮：点击录音 → 再点停止 → 文字自动入框（可配置自动发送）
 - 🪄 **首次使用弹窗**：没配 Key 时点击麦克风，自动弹出设置窗口（选服务商 → 粘贴 Key → 保存即用），
   保存时顺手验证 Key 有效性
-- 🇨🇳 **国内友好**：默认硅基流动，中文识别准确、无需代理；也支持 Groq / OpenAI / 阿里云百炼
+- 🇨🇳 **国内友好**：默认硅基流动，中英混排识别准确、无需代理；也支持 Groq / OpenAI / 阿里云百炼
   或任意 OpenAI 兼容端点（含 whisper.cpp / LocalAI / vLLM 本地免费方案）
 - 🔀 双网络模式：`direct: true` 浏览器直连（走系统代理）；`direct: false`（默认）本机宿主转发，
   Key 不进浏览器
 - 🔒 两条 host 路由均有本机回环信任围栏；Key 只存 `~/.dsh/dsh-web-voice-input.json`（0600 权限），
   绝不进插件代码和客户端 bundle
 - ⏱️ 录音超时自动停止（默认 60 秒）、切换会话自动取消录音、转写完成后焦点回到输入框
+- 🧠 **转写后处理**：专名纠错（Cloud Code → Claude Code、Hermis → Hermes、LangChain 四 j → LangChain4j）
+  + 中文数字规范化（二零二六年八月十五日 → 2026年8月15日、六百六十六 → 666）
 - 🌍 中英文界面；403（地区/权限）与网络/CORS 错误有明确中文提示
 - 🧪 自带离线测试套件（无头 Chrome + 假麦克风端到端测试）
 
@@ -69,7 +71,7 @@ dsh web --dump-config | findstr voice-input    # 应看到 - id: voice-input 一
 
 1. **申请 API Key（推荐硅基流动）**：打开 [cloud.siliconflow.cn](https://cloud.siliconflow.cn)
    免费注册，在「API 密钥」页面创建一个 Key（新用户有免费额度，
-   `FunAudioLLM/SenseVoiceSmall` 与 `TeleAI/TeleSpeechASR` 都是免费模型，中文效果好）
+   `Qwen/Qwen3-ASR-1.7B` 等 ASR 模型免费，中英混排效果好）
 2. **点击聊天框的麦克风按钮** → 自动弹出「配置语音识别」窗口
 3. 服务商默认选中「SiliconFlow 硅基流动」，粘贴你的 Key，点「保存并开始录音」
 4. 保存时插件会自动验证 Key：显示「Key 验证通过 ✓」后即开始录音，之后无需再做任何配置
@@ -91,7 +93,7 @@ profile 配置（`~/.dsh/profiles/web/cordis.patch.yml` 的 `voice-input` 行）
   config:
     provider: siliconflow            # siliconflow（默认）| groq | openai | dashscope
     apiKey: sk-xxxx                  # 也可用环境变量 SILICONFLOW_API_KEY / GROQ_API_KEY 等
-    model: FunAudioLLM/SenseVoiceSmall
+    model: Qwen/Qwen3-ASR-1.7B
     language: zh                     # 留空 = 自动检测
     direct: false                    # false = 宿主转发（Key 不进浏览器）
     maxDurationSec: 60               # 单次录音上限（5~300 秒）
@@ -115,7 +117,7 @@ profile 配置（`~/.dsh/profiles/web/cordis.patch.yml` 的 `voice-input` 行）
 
 | `provider` | 默认模型 | 其他可选 | 国内直连 |
 |---|---|---|---|
-| `siliconflow` | `FunAudioLLM/SenseVoiceSmall` | `TeleAI/TeleSpeechASR` 等 | ✅ |
+| `siliconflow` | `Qwen/Qwen3-ASR-1.7B` | `XingChenAGI/XingChenASR-V3.2-Ultra` 等 | ✅ |
 | `dashscope` | `qwen-audio-asr` | `qwen-audio-asr-latest`、`qwen-audio-3-0-asr-flash` | ✅ |
 | `groq` | `whisper-large-v3-turbo` | `whisper-large-v3` | ❌ 需代理 |
 | `openai` | `whisper-1` | — | ❌ 需代理 |
