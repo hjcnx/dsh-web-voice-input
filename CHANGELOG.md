@@ -5,6 +5,15 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.1] - 2026-10-05
+
+### Fixed
+
+- 专名纠错在中文语境下失效：原文用 `` 单词边界，但中文字符属于 `\w`，
+  中文与英文相邻时边界不成立（`用Hermis和` 匹配不到）。改用
+  `(?<![A-Za-z])` / `(?![A-Za-z])` 只按 ASCII 字母判边界。
+  修复后 `Hermis→Hermes`、`Clock Coat→Claude Code`、`Lunchain4→LangChain4j` 均可修正。
+
 ## [0.3.0] - 2026-09-27
 
 ### Added
